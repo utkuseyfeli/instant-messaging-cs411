@@ -1,1 +1,50 @@
-<p>authentication works!</p>
+<ng-container *ngIf="getIsWarningOpen()">
+  <mat-card class="warning-card">
+    <mat-card-header>
+      <div class="warning-header">
+        <mat-card-title>Warning!</mat-card-title>
+        <button class="close-button" mat-button color="accent" (click)="closeWarning()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <p>UserName is already taken!</p>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>
+
+<div class="authentication-box">
+  <h2 class="info-text" *ngIf="getIsRegisterEnabled()">Register</h2>
+  <h2 class="info-text" *ngIf="!getIsRegisterEnabled()">Login</h2>
+
+  <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="email">
+      <mat-form-field appearance="fill">
+        <mat-label>User Name</mat-label>
+        <input matInput id="userName" formControlName="userName">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" id="password" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <div class="buttons">
+      <button *ngIf="!getIsRegisterEnabled()" mat-raised-button color="primary" class="login-button" type="submit"> Log-In </button>
+      <button *ngIf="getIsRegisterEnabled()" mat-raised-button color="primary" class="login-button" type="submit"> Register </button>
+    </div>
+
+    <div class="login-or-register">
+      <p *ngIf="!getIsRegisterEnabled()">Don't have an account? <a (click)="enableRegister()">Register</a></p>
+      <p *ngIf="getIsRegisterEnabled()">Have an account? <a (click)="enableLogin()">Login</a></p>
+    </div>
+  </form>
+</div>

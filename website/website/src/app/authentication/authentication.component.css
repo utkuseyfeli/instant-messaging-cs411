@@ -1,0 +1,61 @@
+.authentication-box {
+  padding: 20px;
+  background-color: dodgerblue;
+  width: fit-content;
+  height: fit-content;
+  margin: 50px auto;
+  border-radius: 25px;
+}
+
+.email {
+
+}
+
+mat-form-field {
+  width: 300px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  margin: 0 10px;
+}
+
+.login-or-register {
+  margin: 15px 0 0;
+  text-align: center;
+}
+
+a {
+  text-decoration: underline;
+  color: blueviolet;
+}
+
+.info-text {
+  padding-bottom: 10px;
+  border-bottom: 1px solid blueviolet;
+}
+
+.warning-card {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.warning-header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+mat-card {
+  color: blueviolet;
+}
+
+mat-card-content {
+  margin-bottom: 10px;
+}
