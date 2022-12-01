@@ -19,6 +19,9 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { ChatScreenComponent } from './main/chat-screen/chat-screen.component';
+import { ActiveUsersComponent } from './main/active-users/active-users.component';
+import {MainModule} from "./main/main.module";
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -26,7 +29,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     AuthenticationComponent,
     HeaderComponent
   ],
@@ -44,7 +46,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AngularFirestoreModule,
     MatCardModule,
     MatDividerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MainModule
   ],
   providers: [],
   bootstrap: [AppComponent]

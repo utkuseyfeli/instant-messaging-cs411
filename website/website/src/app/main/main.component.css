@@ -1,0 +1,15 @@
+.main-component {
+  width: 90%;
+  margin: 15px auto;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+app-active-users{
+  flex: 2;
+}
+
+app-chat-screen{
+  flex: 5;
+}

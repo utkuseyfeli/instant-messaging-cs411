@@ -1,0 +1,8 @@
+<div class="active-users">
+  <mat-card>
+    <mat-card-content>{{currentUserName}} -> This is you</mat-card-content>
+  </mat-card>
+  <mat-card *ngFor="let user of users" (click)="clickedOnUser(user.userName)" class="other-users" [id]="user.userName">
+    <mat-card-content>{{user.userName}}</mat-card-content>
+  </mat-card>
+</div>

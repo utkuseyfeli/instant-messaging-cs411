@@ -3,6 +3,7 @@ import {AuthenticationService} from "../services/authentication.service";
 import {FormBuilder} from "@angular/forms";
 import {Router} from "@angular/router";
 import {User} from "../types/user";
+import {concatMap, delay, of} from "rxjs";
 
 @Component({
   selector: 'app-authentication',
@@ -12,6 +13,8 @@ import {User} from "../types/user";
 export class AuthenticationComponent implements OnInit{
   private isRegisterEnabled: boolean = false;
   private isWarningOpen: boolean = false;
+  isLoginSuccessful: boolean = false;
+
   hide = true;
 
   form = this.formBuilder.group({
@@ -37,18 +40,24 @@ export class AuthenticationComponent implements OnInit{
 
     // register or login
     if(this.isRegisterEnabled){
-      console.log("utku");
-
-      this.isWarningOpen = !this.authService.register(newUser);
+      this.authService.register(newUser)
+        .subscribe((value: boolean) => {
+          this.isWarningOpen = !value;
+        });
     }else{
       this.authService.login(newUser)
+        .pipe(
+          concatMap((item) => {
+            this.isLoginSuccessful = item;
+            return of(item).pipe(delay(1500));
+          })
+        )
         .subscribe( (loggedIn: boolean) => {
           if(loggedIn) {
             this.router.navigate(['/main']);
           }
         });
     }
-
   }
 
   enableRegister(): void {

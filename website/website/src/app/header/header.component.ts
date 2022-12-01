@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthenticationService} from "../services/authentication.service";
 import {Router} from "@angular/router";
+import {SocketService} from "../services/socket.service";
 
 @Component({
   selector: 'app-header',
@@ -8,13 +9,15 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(private authService: AuthenticationService, private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router, private socketService: SocketService) {
   }
 
   logOut(): void {
-      this.authService.logout()
-        .subscribe((loggedOut: boolean) => {
-          this.router.navigate(["/login"]);
-        });
+    this.socketService.disconnect();
+
+    this.authService.logout()
+      .subscribe((loggedOut: boolean) => {
+        this.router.navigate(["/login"]);
+      });
   }
 }

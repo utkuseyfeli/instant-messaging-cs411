@@ -1,0 +1,21 @@
+.active-users{
+  width: 100%;
+  height: 50vh;
+  background-color: yellowgreen;
+  border-radius: 20px;
+  padding: 15px 0;
+}
+
+mat-card:not(:last-child){
+  margin: 0 auto 10px;
+}
+
+mat-card {
+  width: 80%;
+  margin: auto;
+}
+
+.other-users:hover {
+  background-color: white;
+  cursor: pointer;
+}

@@ -1,0 +1,39 @@
+.chat-screen{
+  height: 75vh;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  border: 1px solid crimson;
+  //padding: 15px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+mat-card {
+  width: fit-content;
+  max-width: 45%;
+}
+
+.left {
+  position: relative;
+  left: 50px;
+}
+
+.right {
+  position: relative;
+  right: 50px;
+}
+
+.input-message {
+  align-self: flex-end;
+  width: 100%;
+  margin-top: 22px;
+  position: relative;
+  top: 23px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+

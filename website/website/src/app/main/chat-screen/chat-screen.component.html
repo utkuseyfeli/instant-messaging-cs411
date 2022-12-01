@@ -1,0 +1,13 @@
+<div class="chat-screen">
+  <div class="messages">
+    <mat-card class="left" *ngFor="let message of messages">
+      <mat-card-content>{{message}}</mat-card-content>
+    </mat-card>
+  </div>
+
+  <form class="input-message" [formGroup]="messageForm" (keydown.enter)="onSubmit()">
+    <mat-form-field>
+      <input formControlName="message" matInput #message maxlength="64" placeholder="Type your message...">
+    </mat-form-field>
+  </form>
+</div>

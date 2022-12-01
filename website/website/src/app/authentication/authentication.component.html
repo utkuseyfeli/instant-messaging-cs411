@@ -15,6 +15,19 @@
   </mat-card>
 </ng-container>
 
+<ng-container *ngIf="isLoginSuccessful">
+  <mat-card class="warning-card">
+    <mat-card-header>
+      <div class="warning-header">
+        <mat-card-title>Login Successful</mat-card-title>
+      </div>
+    </mat-card-header>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>
+
 <div class="authentication-box">
   <h2 class="info-text" *ngIf="getIsRegisterEnabled()">Register</h2>
   <h2 class="info-text" *ngIf="!getIsRegisterEnabled()">Login</h2>
