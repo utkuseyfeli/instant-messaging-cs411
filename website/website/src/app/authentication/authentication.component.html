@@ -15,11 +15,12 @@
   </mat-card>
 </ng-container>
 
-<ng-container *ngIf="isLoginSuccessful">
+<ng-container *ngIf="isLoginSuccessful || isRegisterSuccessful">
   <mat-card class="warning-card">
     <mat-card-header>
       <div class="warning-header">
-        <mat-card-title>Login Successful</mat-card-title>
+        <mat-card-title *ngIf="isLoginSuccessful">Login Successful</mat-card-title>
+        <mat-card-title *ngIf="isRegisterSuccessful">Register Successful</mat-card-title>
       </div>
     </mat-card-header>
     <mat-card-footer>

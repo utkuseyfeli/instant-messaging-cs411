@@ -34,15 +34,36 @@ io.on("connection", (socket) => {
     })
 
     socket.on("chatWith", (info) => {
-        let available = chatRooms.filter((room) => {
+        let availableRoom = chatRooms.find((room) => {
             if(room === info.userName || room === info.other){
                 return room;
             }
         });
         let roomName = "";
-        console.log("available: ", available);
+        console.log("available: ", availableRoom);
 
-        if(available.length !== 0){
+        if(typeof availableRoom !== "undefined"){
+            roomName = info.other;
+        }else{
+            roomName = info.myself;
+            chatRooms.push(roomName);
+        }
+        socket.join(roomName);
+
+        console.log(roomName, chatRooms);
+        io.to(roomName).emit("connectedToRoom", roomName);
+    });
+
+    socket.on("chatWith", (info) => {
+        let availableRoom = chatRooms.find((room) => {
+            if(room === info.userName || room === info.other){
+                return room;
+            }
+        });
+        let roomName = "";
+        console.log("available: ", availableRoom);
+
+        if(typeof availableRoom !== "undefined"){
             roomName = info.other;
         }else{
             roomName = info.myself;

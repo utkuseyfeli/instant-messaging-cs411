@@ -47,6 +47,8 @@ export class AuthenticationService {
       return of(false);
     }else {
       this.usersRef.add(user);
+      localStorage.setItem('isUserLoggedIn', "true");
+      localStorage.setItem("userName", user.userName);
       return of(true);
     }
 

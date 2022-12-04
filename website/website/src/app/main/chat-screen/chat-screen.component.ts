@@ -68,4 +68,8 @@ export class ChatScreenComponent implements OnInit{
 
     this.messageForm.reset();
   }
+
+  setMessages(messages: string[]): void {
+    this.messages = messages;
+  }
 }

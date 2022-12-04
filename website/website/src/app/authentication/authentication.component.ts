@@ -14,6 +14,7 @@ export class AuthenticationComponent implements OnInit{
   private isRegisterEnabled: boolean = false;
   private isWarningOpen: boolean = false;
   isLoginSuccessful: boolean = false;
+  isRegisterSuccessful: boolean = false;
 
   hide = true;
 
@@ -41,8 +42,22 @@ export class AuthenticationComponent implements OnInit{
     // register or login
     if(this.isRegisterEnabled){
       this.authService.register(newUser)
+        .pipe(
+          concatMap((value: boolean) => {
+            if(value) {
+              this.isRegisterSuccessful = value;
+              return of(value).pipe(delay(1500));
+            }else {
+              return of(value);
+            }
+          })
+        )
         .subscribe((value: boolean) => {
           this.isWarningOpen = !value;
+
+          if(value){
+            this.router.navigate(['/main']);
+          }
         });
     }else{
       this.authService.login(newUser)
