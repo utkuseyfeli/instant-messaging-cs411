@@ -20,7 +20,7 @@ export class ActiveUsersComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.currentUserName = localStorage.getItem("userName")!;
+    this.currentUserName = sessionStorage.getItem("userName")!;
 
     this.socketService.fromEvent("getUsers").subscribe((value) => {
       console.log("value: ", value);
@@ -34,14 +34,7 @@ export class ActiveUsersComponent implements OnInit{
   }
 
   clickedOnUser(userName: string) {
-    let roomName = "";
-    if(this.currentUserName?.localeCompare(userName)! > 0){
-      roomName = userName + "~" + this.currentUserName;
-    } else {
-      roomName = this.currentUserName + "~" + userName;
-    }
-
-    this.socketService.sendMessage("leaveRoom", roomName);
+    this.socketService.sendMessage("leaveRoom");
 
     this.socketService.sendMessage("chatWith", {myself: this.currentUserName, other: userName});
     this.resetMessagesEvent.emit([]);

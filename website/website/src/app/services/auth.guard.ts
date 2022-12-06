@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): any{
-    let val: string | null = localStorage.getItem("isUserLoggedIn");
+    let val: string | null = sessionStorage.getItem("isUserLoggedIn");
 
     if(val != null && val == "true"){
       if(url == "/login")

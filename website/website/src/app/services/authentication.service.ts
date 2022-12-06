@@ -23,8 +23,8 @@ export class AuthenticationService {
 
   login(user: User): Observable<boolean> {
     if( this.users.some((usr: User) => usr.userName === user.userName && usr.password === user.password) ) {
-      localStorage.setItem('isUserLoggedIn', "true");
-      localStorage.setItem("userName", user.userName);
+      sessionStorage.setItem('isUserLoggedIn', "true");
+      sessionStorage.setItem("userName", user.userName);
       console.log(this.users, " asd");
 
       return of(true);
@@ -35,7 +35,7 @@ export class AuthenticationService {
 
   logout(): Observable<boolean> {
     this.isUserLoggedIn = false;
-    localStorage.removeItem('isUserLoggedIn');
+    sessionStorage.removeItem('isUserLoggedIn');
 
     return of(true);
   }
@@ -47,8 +47,8 @@ export class AuthenticationService {
       return of(false);
     }else {
       this.usersRef.add(user);
-      localStorage.setItem('isUserLoggedIn', "true");
-      localStorage.setItem("userName", user.userName);
+      sessionStorage.setItem('isUserLoggedIn', "true");
+      sessionStorage.setItem("userName", user.userName);
       return of(true);
     }
 

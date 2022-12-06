@@ -23,7 +23,7 @@ export class ChatScreenComponent implements OnInit{
 
   ngOnInit() {
     this.messageForm.get("message")?.disable();
-    this.currentUser = localStorage.getItem("userName")!;
+    this.currentUser = sessionStorage.getItem("userName")!;
 
     this.socketService.fromEvent("connectedToRoom")
       .pipe(

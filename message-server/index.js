@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
         io.to(messageInfo.roomName).emit("messageToClients", messageInfo);
     });
 
-    socket.on("leaveRoom", (roomName) => {
+    socket.on("leaveRoom", () => {
         let rooms = socket.rooms;
 
         rooms.forEach((room) => {

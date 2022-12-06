@@ -18,7 +18,7 @@ export class MainComponent implements OnInit{
 
   ngOnInit(): void {
     this.socketService.connect();
-    this.socketService.sendMessage("connected", {userName: localStorage.getItem("userName")});
+    this.socketService.sendMessage("connected", {userName: sessionStorage.getItem("userName")});
   }
 
   resetMessages(messages: Message[]){
