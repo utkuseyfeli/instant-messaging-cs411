@@ -15,6 +15,8 @@ export class AuthenticationComponent implements OnInit{
   private isWarningOpen: boolean = false;
   isLoginSuccessful: boolean = false;
   isRegisterSuccessful: boolean = false;
+  tildeInUserName: boolean = false;
+  emptyField: boolean = false;
 
   hide = true;
 
@@ -31,8 +33,20 @@ export class AuthenticationComponent implements OnInit{
   }
 
   onSubmit() {
+    this.closeTildeWarning();
+
     let authInfo = this.form.value;
     this.form.reset();
+
+    if (authInfo.userName?.includes("~")){
+      this.tildeInUserName = true;
+      return;
+    }
+
+    if(authInfo.userName === null || authInfo.password === null){
+      this.emptyField = true;
+      return;
+    }
 
     let newUser: User = {
       userName: authInfo.userName!,
@@ -93,5 +107,10 @@ export class AuthenticationComponent implements OnInit{
 
   getIsWarningOpen(): boolean {
     return this.isWarningOpen;
+  }
+
+  closeTildeWarning(): void {
+    this.tildeInUserName = false;
+    this.emptyField = false;
   }
 }

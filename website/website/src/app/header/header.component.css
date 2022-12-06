@@ -11,6 +11,7 @@
   margin-left: 20px;
   display: flex;
   align-items: center;
+  width: 25%;
 }
 
 .logo {
@@ -18,6 +19,7 @@
 }
 
 .header-right {
+  width: 25%;
   margin-right: 20px;
 }
 
@@ -28,7 +30,13 @@ span {
 }
 
 .log-out-button {
+  visibility: visible;
   color: black !important;
+  float: right;
+}
+
+.disable-logout {
+  visibility: hidden;
 }
 
 .header-center {

@@ -3,8 +3,9 @@
   <div class="header-left">
     <img class="logo" src="assets/logo.svg">
 
-    <span>Welcome, {{userName}}</span>
-
+    <ng-container *ngIf="userName">
+      <span>Welcome, {{userName}}</span>
+    </ng-container>
   </div>
 
   <div class="header-center">
@@ -12,6 +13,6 @@
   </div>
 
   <div class="header-right">
-    <button class="log-out-button" mat-raised-button color="warn" (click)="logOut()">Log-Out</button>
+      <button [ngClass]="{'disable-logout': userName === null || userName === undefined}" class="log-out-button" mat-raised-button color="warn" (click)="logOut()">Log-Out</button>
   </div>
 </div>

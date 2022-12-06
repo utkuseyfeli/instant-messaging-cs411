@@ -29,3 +29,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ------------------------------------------------
 node_modules/@angular/fire/compat/firestore/interfaces.d.ts -> changed because of the current problem with the @angular/fire package version 7.5.0
+<!-- Try erasing browser cache -->

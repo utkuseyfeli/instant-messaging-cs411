@@ -15,6 +15,24 @@
   </mat-card>
 </ng-container>
 
+<ng-container *ngIf="tildeInUserName || emptyField">
+  <mat-card class="warning-card">
+    <mat-card-header>
+      <div class="warning-header">
+        <mat-card-title>Warning!</mat-card-title>
+        <button class="close-button" mat-button color="accent" (click)="closeTildeWarning()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="!emptyField">User Name cannot include "~" character</p>
+      <p *ngIf="emptyField">User Name or password cannot be empty</p>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</ng-container>
+
 <ng-container *ngIf="isLoginSuccessful || isRegisterSuccessful">
   <mat-card class="warning-card">
     <mat-card-header>
