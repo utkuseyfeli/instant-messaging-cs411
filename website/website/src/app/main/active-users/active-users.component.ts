@@ -34,25 +34,26 @@ export class ActiveUsersComponent implements OnInit{
   }
 
   clickedOnUser(userName: string) {
-    // let roomName = "";
-    // if(this.currentUserName?.localeCompare(userName)! > 0){
-    //   roomName = userName + "~" + this.currentUserName;
-    // } else {
-    //   roomName = this.currentUserName + userName + "~";
-    // }
+    let roomName = "";
+    if(this.currentUserName?.localeCompare(userName)! > 0){
+      roomName = userName + "~" + this.currentUserName;
+    } else {
+      roomName = this.currentUserName + "~" + userName;
+    }
 
-    // this.socketService.sendMessage("leaveRoom", roomName);
-    this.socketService.sendMessage("chatWith1", {myself: this.currentUserName, other: userName});
+    this.socketService.sendMessage("leaveRoom", roomName);
+
+    this.socketService.sendMessage("chatWith", {myself: this.currentUserName, other: userName});
     this.resetMessagesEvent.emit([]);
 
     let otherUsers = document.getElementsByClassName("other-users");
     Array.from(otherUsers as HTMLCollectionOf<HTMLElement>).filter((user) => {
       if(user.id === userName){
-        user.style.pointerEvents = "none";
-        user.style.backgroundColor = "#4287f5";
+        user.classList.remove("other-users:hover");
+        user.classList.add("enabled-user");
       }else {
-        user.style.pointerEvents = "auto";
-        user.style.backgroundColor = "#424242";
+        user.classList.add("other-users:hover");
+        user.classList.remove("enabled-user");
       }
       return;
     });

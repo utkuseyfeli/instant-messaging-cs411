@@ -38,29 +38,8 @@ io.on("connection", (socket) => {
         console.log(users);
     })
 
-    socket.on("chatWith", (info) => {
-        let availableRoom = chatRooms.find((room) => {
-            if(room === info.myself || room === info.other){
-                return room;
-            }
-        });
-        let roomName = "";
-        console.log("available: ", availableRoom);
-
-        if(typeof availableRoom !== "undefined"){
-            roomName = info.other;
-        }else{
-            roomName = info.myself;
-            chatRooms.push(roomName);
-        }
-        socket.join(roomName);
-
-        console.log(roomName, chatRooms);
-        io.to(roomName).emit("connectedToRoom", roomName);
-    });
-
     // clean up this code
-    socket.on("chatWith1", (info) => {
+    socket.on("chatWith", (info) => {
         let possibleRoomName = "";
 
         if(info.myself.localeCompare(info.other) > 0){
@@ -74,9 +53,8 @@ io.on("connection", (socket) => {
                 return room;
             }
         });
-        let roomName = "";
-        console.log("available: ", availableRoom);
 
+        let roomName = "";
         if(typeof availableRoom !== "undefined"){
             roomName = availableRoom;
         }else{
@@ -85,8 +63,6 @@ io.on("connection", (socket) => {
         }
 
         socket.join(roomName);
-
-        console.log(roomName, chatRooms);
         io.to(roomName).emit("connectedToRoom", roomName);
     });
 
@@ -95,9 +71,11 @@ io.on("connection", (socket) => {
     });
 
     socket.on("leaveRoom", (roomName) => {
-        socket.to(roomName).emit("partnerDisconnected");
+        let rooms = socket.rooms;
 
-        socket.leave(roomName);
+        rooms.forEach((room) => {
+            socket.leave(room);
+        });
     })
 });
 

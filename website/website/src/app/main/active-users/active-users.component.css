@@ -19,3 +19,14 @@ mat-card {
   background-color: white;
   cursor: pointer;
 }
+
+.enabled-user {
+  pointer-events: none;
+  background-color: #4287f5;
+}
+
+.title {
+  margin: 10px auto;
+  text-align: center;
+  font-weight: 500;
+}
