@@ -1,13 +1,13 @@
 <div class="chat-screen">
   <div class="messages" id="messages">
     <mat-card [ngClass]="{'right': currentUser === message.from, 'left': currentUser !== message.from}" *ngFor="let message of messages">
-      <mat-card-content >{{message.message}}</mat-card-content>
+      <mat-card-content>{{message.message}}</mat-card-content>
     </mat-card>
   </div>
 
   <form class="input-message" [formGroup]="messageForm" (keydown.enter)="onSubmit()">
     <mat-form-field>
-      <input formControlName="message" matInput #message maxlength="64" placeholder="Type your message...">
+      <input formControlName="message" matInput #message maxlength="32" placeholder="Type your message...">
     </mat-form-field>
   </form>
 </div>

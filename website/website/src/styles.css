@@ -3,6 +3,12 @@
 html, body { height: 100%; }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Quicksand, serif;
+  font-size: 20px;
   background-color: dimgrey;
+}
+
+span {
+  font-family: Quicksand, serif;
+  font-size: 16px;
 }

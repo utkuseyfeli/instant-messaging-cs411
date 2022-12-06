@@ -8,12 +8,14 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
+import { AllUsersComponent } from './all-users/all-users.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     ChatScreenComponent,
-    ActiveUsersComponent
+    ActiveUsersComponent,
+    AllUsersComponent
   ],
   imports: [
     CommonModule,
