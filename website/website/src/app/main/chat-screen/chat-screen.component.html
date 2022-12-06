@@ -1,7 +1,7 @@
 <div class="chat-screen">
-  <div class="messages">
-    <mat-card class="left" *ngFor="let message of messages">
-      <mat-card-content>{{message}}</mat-card-content>
+  <div class="messages" id="messages">
+    <mat-card [ngClass]="{'right': currentUser === message.from, 'left': currentUser !== message.from}" *ngFor="let message of messages">
+      <mat-card-content >{{message.message}}</mat-card-content>
     </mat-card>
   </div>
 

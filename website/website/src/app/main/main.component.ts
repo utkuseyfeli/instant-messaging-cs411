@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SocketService} from "../services/socket.service";
 import {SocketUser} from "../types/user";
 import {Observable, of} from "rxjs";
+import {Message} from "../types/message";
 
 @Component({
   selector: 'app-main',
@@ -9,11 +10,19 @@ import {Observable, of} from "rxjs";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit{
+
+  messages: Message[] = [];
+
   constructor(private socketService: SocketService) {
   }
 
   ngOnInit(): void {
     this.socketService.connect();
     this.socketService.sendMessage("connected", {userName: localStorage.getItem("userName")});
+  }
+
+  resetMessages(messages: Message[]){
+    console.log("zoooooortttt");
+    this.messages = messages;
   }
 }

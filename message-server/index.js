@@ -4,7 +4,11 @@ const { Server } = require("socket.io");
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer, { /* options */ });
+const io = new Server(httpServer, {
+    cors: {
+        origin: "*",
+    }
+});
 
 let users = [];
 let chatRooms = [];
@@ -31,11 +35,12 @@ io.on("connection", (socket) => {
                 return usr;
             }
         })
+        console.log(users);
     })
 
     socket.on("chatWith", (info) => {
         let availableRoom = chatRooms.find((room) => {
-            if(room === info.userName || room === info.other){
+            if(room === info.myself || room === info.other){
                 return room;
             }
         });
@@ -54,9 +59,18 @@ io.on("connection", (socket) => {
         io.to(roomName).emit("connectedToRoom", roomName);
     });
 
-    socket.on("chatWith", (info) => {
+    // clean up this code
+    socket.on("chatWith1", (info) => {
+        let possibleRoomName = "";
+
+        if(info.myself.localeCompare(info.other) > 0){
+            possibleRoomName = info.other + "~" + info.myself;
+        }else if(info.myself.localeCompare(info.other) < 0){
+            possibleRoomName = info.myself + "~" + info.other;
+        }
+
         let availableRoom = chatRooms.find((room) => {
-            if(room === info.userName || room === info.other){
+            if(room === possibleRoomName){
                 return room;
             }
         });
@@ -64,11 +78,12 @@ io.on("connection", (socket) => {
         console.log("available: ", availableRoom);
 
         if(typeof availableRoom !== "undefined"){
-            roomName = info.other;
+            roomName = availableRoom;
         }else{
-            roomName = info.myself;
+            roomName = possibleRoomName;
             chatRooms.push(roomName);
         }
+
         socket.join(roomName);
 
         console.log(roomName, chatRooms);
@@ -78,6 +93,12 @@ io.on("connection", (socket) => {
     socket.on("messageToServer", (messageInfo) => {
         io.to(messageInfo.roomName).emit("messageToClients", messageInfo);
     });
+
+    socket.on("leaveRoom", (roomName) => {
+        socket.to(roomName).emit("partnerDisconnected");
+
+        socket.leave(roomName);
+    })
 });
 
 httpServer.listen(3000);

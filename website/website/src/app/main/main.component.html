@@ -1,4 +1,4 @@
 <div class="main-component">
-  <app-active-users></app-active-users>
-  <app-chat-screen></app-chat-screen>
+  <app-active-users (resetMessagesEvent)="resetMessages($event)"></app-active-users>
+  <app-chat-screen [messages]="messages"></app-chat-screen>
 </div>

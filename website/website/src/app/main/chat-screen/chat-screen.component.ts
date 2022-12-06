@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SocketService} from "../../services/socket.service";
 import {FormBuilder} from "@angular/forms";
-import {concatMap, map, of} from "rxjs";
+import {concatMap, first, map, of, Subscription, switchMap} from "rxjs";
+import {Message} from "../../types/message";
+import {MessageService} from "../../services/message.service";
 
 @Component({
   selector: 'app-chat-screen',
@@ -10,13 +12,13 @@ import {concatMap, map, of} from "rxjs";
 })
 export class ChatScreenComponent implements OnInit{
   roomName: string = "";
-  messages: string[] = [];
+  @Input() messages: Message[] = [];
   currentUser: string = "";
   messageForm = this.formBuilder.group({
     message: ""
   });
 
-  constructor(private socketService: SocketService, private formBuilder: FormBuilder) {
+  constructor(private socketService: SocketService, private formBuilder: FormBuilder, private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -24,26 +26,35 @@ export class ChatScreenComponent implements OnInit{
     this.currentUser = localStorage.getItem("userName")!;
 
     this.socketService.fromEvent("connectedToRoom")
-      .subscribe((roomName: string) => {
-        this.messageForm.get("message")?.enable();
-        this.roomName = roomName;
-      });
+      .pipe(
+        concatMap((roomName: string) => {
+          this.messageForm.get("message")?.enable();
+          this.roomName = roomName;
+          return this.messageService.getMessagesInRoom(roomName).pipe(first());
+        }),
+        concatMap((messages) => {
+          return this.messages = messages;
+        })
+      )
+      .subscribe();
 
     this.socketService.fromEvent("messageToClients")
       .pipe(
-        map((message) => {
-          if(message.from === this.currentUser){
-            return null;
-          }else{
-            return message;
+        concatMap((message) => {
+          if(message !== null){
+            this.messages.push(message);
+            return of(true);
           }
+          return of(false);
+        }),
+        concatMap(val => {
+          if(val){
+            this.scrollToBottom();
+          }
+          return of();
         })
       )
-      .subscribe((messageInfo) => {
-        if(messageInfo !== null){
-          this.messages.push(messageInfo.message);
-        }
-      });
+      .subscribe();
   }
 
   enableChat(): boolean{
@@ -64,12 +75,22 @@ export class ChatScreenComponent implements OnInit{
       from: this.currentUser
     })
 
-    this.messages.push(message);
+    // firestore service
+    this.messageService.pushMessageIntoRoom({
+      roomName: this.roomName,
+      message: message,
+      from: this.currentUser
+    });
 
     this.messageForm.reset();
   }
 
-  setMessages(messages: string[]): void {
+  setMessages(messages: Message[]): void {
     this.messages = messages;
+  }
+
+  scrollToBottom(): void {
+    let elem = document.getElementById('messages')!;
+    elem.scrollTop = elem.scrollHeight;
   }
 }
