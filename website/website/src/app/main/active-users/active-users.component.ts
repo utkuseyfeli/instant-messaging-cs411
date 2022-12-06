@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {SocketUser} from "../../types/user";
-import {Observable, of} from "rxjs";
+import {SocketUser, User} from "../../types/user";
+import {concatMap, Observable, of} from "rxjs";
 import {SocketService} from "../../services/socket.service";
 import { Message } from "../../types/message";
 import {Element} from "@angular/compiler";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-active-users',
@@ -12,11 +13,12 @@ import {Element} from "@angular/compiler";
 })
 export class ActiveUsersComponent implements OnInit{
   users?: SocketUser[];
+  allUsers?: User[];
   currentUserName?: string;
 
   @Output() resetMessagesEvent = new EventEmitter<Message[]>();
 
-  constructor(private socketService: SocketService) {
+  constructor(private socketService: SocketService, private authService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -31,6 +33,15 @@ export class ActiveUsersComponent implements OnInit{
         }
       });
     });
+
+    this.authService.getAllUsers()
+      .pipe(
+        concatMap((users) => {
+          this.allUsers = users;
+          return of();
+        })
+      )
+      .subscribe();
   }
 
   clickedOnUser(userName: string) {

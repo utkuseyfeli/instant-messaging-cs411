@@ -7,13 +7,9 @@
   overflow-y: auto;
 }
 
-mat-card:not(:last-child){
-  margin: 0 auto 10px;
-}
-
 mat-card {
   width: 80%;
-  margin: auto;
+  margin: 10px auto 0;
   color: yellowgreen;
 }
 
@@ -31,5 +27,9 @@ mat-card {
   margin: 10px auto;
   text-align: center;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22px;
+}
+
+.users-switch {
+  display: flex;
 }

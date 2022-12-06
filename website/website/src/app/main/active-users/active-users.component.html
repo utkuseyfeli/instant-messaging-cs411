@@ -1,9 +1,23 @@
 <div class="active-users">
-  <div class="title"> Active Users </div>
-  <mat-card>
-    <mat-card-content>{{currentUserName}} -> This is you</mat-card-content>
-  </mat-card>
-  <mat-card *ngFor="let user of users" (click)="clickedOnUser(user.userName)" class="other-users" [id]="user.userName">
-    <mat-card-content>{{user.userName}}</mat-card-content>
-  </mat-card>
+  <mat-tab-group animationDuration="500ms">
+    <mat-tab label="Active Users">
+      <mat-card>
+        <mat-card-content>{{currentUserName}} -> This is you</mat-card-content>
+      </mat-card>
+      <mat-card *ngFor="let user of users" (click)="clickedOnUser(user.userName)" class="other-users" [id]="user.userName">
+        <mat-card-content>{{user.userName}}</mat-card-content>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="All Users">
+      <mat-card>
+        <mat-card-content>{{currentUserName}} -> This is you</mat-card-content>
+      </mat-card>
+
+      <ng-container *ngFor="let user of allUsers">
+        <mat-card *ngIf="user.userName !== currentUserName" (click)="clickedOnUser(user.userName)" class="other-users" [id]="user.userName">
+          <mat-card-content  >{{user.userName}}</mat-card-content>
+        </mat-card>
+      </ng-container>
+    </mat-tab>
+  </mat-tab-group>
 </div>

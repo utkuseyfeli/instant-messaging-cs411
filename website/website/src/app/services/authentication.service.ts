@@ -51,6 +51,9 @@ export class AuthenticationService {
       sessionStorage.setItem("userName", user.userName);
       return of(true);
     }
+  }
 
+  getAllUsers(): Observable<any>{
+    return this.usersRef.valueChanges();
   }
 }
