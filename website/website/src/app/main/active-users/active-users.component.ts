@@ -44,7 +44,7 @@ export class ActiveUsersComponent implements OnInit{
       .subscribe();
   }
 
-  clickedOnUser(userName: string) {
+  clickedOnUser(userName: string): void {
     this.socketService.sendMessage("leaveRoom");
 
     this.socketService.sendMessage("chatWith", {myself: this.currentUserName, other: userName});
@@ -61,6 +61,17 @@ export class ActiveUsersComponent implements OnInit{
       }
       return;
     });
+  }
+
+  tabChanged(): void {
+    let otherUsers = document.getElementsByClassName("other-users");
+    Array.from(otherUsers as HTMLCollectionOf<HTMLElement>).filter((user) => {
+        user.classList.add("other-users:hover");
+        user.classList.remove("enabled-user");
+      return;
+    });
+
+    this.resetMessagesEvent.emit([]);
   }
 
 }

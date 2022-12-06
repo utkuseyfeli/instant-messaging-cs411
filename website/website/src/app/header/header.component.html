@@ -2,9 +2,16 @@
 
   <div class="header-left">
     <img class="logo" src="assets/logo.svg">
+
+    <span>Welcome, {{userName}}</span>
+
+  </div>
+
+  <div class="header-center">
+    MessageMe
   </div>
 
   <div class="header-right">
-    <button mat-button (click)="logOut()">Log-Out</button>
+    <button class="log-out-button" mat-raised-button color="warn" (click)="logOut()">Log-Out</button>
   </div>
 </div>
