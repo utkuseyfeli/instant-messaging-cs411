@@ -32,12 +32,12 @@ p {
 
 a {
   text-decoration: underline;
-  color: blueviolet;
+  color: #c2185b;
 }
 
 .info-text {
   padding-bottom: 10px;
-  border-bottom: 1px solid blueviolet;
+  border-bottom: 1px solid #c2185b;
 }
 
 .warning-card {
@@ -50,10 +50,6 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-mat-card {
-  color: blueviolet;
 }
 
 mat-card-content {
