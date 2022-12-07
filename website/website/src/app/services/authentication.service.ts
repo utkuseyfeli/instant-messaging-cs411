@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {delay, Observable, of, tap} from "rxjs";
-import {ɵElement, ɵValue} from "@angular/forms";
-import {collection, collectionData, Firestore} from "@angular/fire/firestore";
+import {Observable, of} from "rxjs";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {User} from "../types/user";
 
