@@ -10,7 +10,6 @@ import {Message} from "../types/message";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit{
-
   messages: Message[] = [];
 
   constructor(private socketService: SocketService) {
@@ -22,7 +21,6 @@ export class MainComponent implements OnInit{
   }
 
   resetMessages(messages: Message[]){
-    console.log("zoooooortttt");
     this.messages = messages;
   }
 }

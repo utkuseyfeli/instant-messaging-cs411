@@ -59,3 +59,17 @@ mat-card {
 mat-card-content {
   margin-bottom: 10px;
 }
+
+mat-card-title {
+  color: dodgerblue;
+  font-family: Quicksand, serif;
+  font-weight: bold;
+}
+
+mat-card-content {
+  color: dodgerblue;
+}
+
+mat-progress-bar {
+  color: dodgerblue;
+}

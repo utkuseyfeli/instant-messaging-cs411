@@ -13,6 +13,7 @@ import {concatMap, delay, of} from "rxjs";
 export class AuthenticationComponent implements OnInit{
   private isRegisterEnabled: boolean = false;
   private isWarningOpen: boolean = false;
+  isLoginUnsuccessful: boolean = false;
   isLoginSuccessful: boolean = false;
   isRegisterSuccessful: boolean = false;
   tildeInUserName: boolean = false;
@@ -78,6 +79,8 @@ export class AuthenticationComponent implements OnInit{
         .pipe(
           concatMap((item) => {
             this.isLoginSuccessful = item;
+            this.isLoginUnsuccessful = !item;
+
             return of(item).pipe(delay(1500));
           })
         )
@@ -112,5 +115,6 @@ export class AuthenticationComponent implements OnInit{
   closeTildeWarning(): void {
     this.tildeInUserName = false;
     this.emptyField = false;
+    this.isLoginUnsuccessful = false;
   }
 }

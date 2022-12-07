@@ -14,7 +14,6 @@ export class AuthenticationService {
   usersRef;
   users: any;
   constructor(private firestore: AngularFirestore) {
-    console.log("constructor");
     this.usersRef = firestore.collection("users");
     this.usersRef.valueChanges().subscribe((data) => {
       this.users = data;
@@ -25,7 +24,6 @@ export class AuthenticationService {
     if( this.users.some((usr: User) => usr.userName === user.userName && usr.password === user.password) ) {
       sessionStorage.setItem('isUserLoggedIn', "true");
       sessionStorage.setItem("userName", user.userName);
-      console.log(this.users, " asd");
 
       return of(true);
     }else {
@@ -41,8 +39,6 @@ export class AuthenticationService {
   }
 
   register(user: User): Observable<boolean> {
-    console.log(this.users, " asd");
-
     if( this.users.some((usr: User) => usr.userName === user.userName) ) {
       return of(false);
     }else {

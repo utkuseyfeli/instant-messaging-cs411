@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {SocketUser, User} from "../../types/user";
-import {concatMap, Observable, of} from "rxjs";
+import {concatMap, of} from "rxjs";
 import {SocketService} from "../../services/socket.service";
 import { Message } from "../../types/message";
-import {Element} from "@angular/compiler";
 import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({

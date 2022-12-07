@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SocketService} from "../../services/socket.service";
 import {FormBuilder} from "@angular/forms";
-import {concatMap, first, map, of, Subscription, switchMap} from "rxjs";
+import {concatMap, first, of} from "rxjs";
 import {Message} from "../../types/message";
 import {MessageService} from "../../services/message.service";
 
@@ -57,10 +57,6 @@ export class ChatScreenComponent implements OnInit{
       .subscribe();
   }
 
-  enableChat(): boolean{
-    return this.roomName != "";
-  }
-
   onSubmit() {
     let message = this.messageForm.value.message!;
     console.log(message);
@@ -83,10 +79,6 @@ export class ChatScreenComponent implements OnInit{
     });
 
     this.messageForm.reset();
-  }
-
-  setMessages(messages: Message[]): void {
-    this.messages = messages;
   }
 
   scrollToBottom(): void {

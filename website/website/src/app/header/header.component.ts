@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../services/authentication.service";
-import {Router, RouterEvent} from "@angular/router";
+import {Router} from "@angular/router";
 import {SocketService} from "../services/socket.service";
-import {concatMap, filter, fromEvent, map, Observable, of} from "rxjs";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-header',

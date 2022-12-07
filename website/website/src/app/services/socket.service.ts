@@ -6,7 +6,6 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class SocketService {
-
   constructor(private socket: Socket) {
     this.disconnect();
   }
@@ -34,5 +33,4 @@ export class SocketService {
   disconnect() {
     this.socket.disconnect();
   }
-
 }

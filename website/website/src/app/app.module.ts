@@ -19,8 +19,6 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {MatCardModule} from "@angular/material/card";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import { ChatScreenComponent } from './main/chat-screen/chat-screen.component';
-import { ActiveUsersComponent } from './main/active-users/active-users.component';
 import {MainModule} from "./main/main.module";
 
 
