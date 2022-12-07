@@ -37,6 +37,8 @@ io.on("connection", (socket) => {
             }
         })
         console.log(users);
+
+        io.emit("getUsers", users);
     })
 
     // clean up this code
