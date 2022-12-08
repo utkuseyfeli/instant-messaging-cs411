@@ -1,16 +1,23 @@
 Required environments:
+
     Node.js v18.12.1
     Angular v15
+    
 You can follow the instructions from their websites to set them up.
+
 https://nodejs.org/en/
+
 https://angular.io/guide/setup-local (or just type "npm install -g @angular/cli" command to install it).
 
+
 In order to run Message Server;
+
     1. Go into message-server folder.
     2. (For the first run) Run "npm install" command from the terminal.
     3. Run node.index.js. (Optionally you can install "nodemon" package globally and run server using it).
 
 In order to run Website;
+
     1. Go into website/website folder.
     2. (For the first run) Run "npm install" command from the terminal.
     3. (For the first run) Change the interfaces.d.ts file in the following directory:
