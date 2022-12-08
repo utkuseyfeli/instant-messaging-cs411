@@ -13,7 +13,6 @@ const io = new Server(httpServer, {
 
 let users = [];
 let chatRooms = [];
-let messages = [];
 
 io.on("connection", (socket) => {
     console.log("connected");
