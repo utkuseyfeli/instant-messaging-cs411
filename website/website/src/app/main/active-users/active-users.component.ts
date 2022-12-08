@@ -24,8 +24,6 @@ export class ActiveUsersComponent implements OnInit{
     this.currentUserName = sessionStorage.getItem("userName")!;
 
     this.socketService.fromEvent("getUsers").subscribe((value) => {
-      console.log("value: ", value);
-
       this.users = value.filter((usrs: any) => {
         if(usrs.userName !== this.currentUserName){
           return usrs;
