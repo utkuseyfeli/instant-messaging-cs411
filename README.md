@@ -1,3 +1,4 @@
+!!Important Note: Firebase related API keys are all deactivated. In order to run it again with firestore features new keys are required.
 Required environments:
 
     Node.js v18.12.1
